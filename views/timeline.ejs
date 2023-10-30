@@ -1,0 +1,38 @@
+
+
+
+<div class="container">
+  <h1>Codeial | Home</h1>
+
+  <div class="row">
+    <section id="">
+      <div class="col-md-3"></div>
+    </section>
+
+      <%- include('_post-list') -%>
+
+    <% if(locals.user){ %>
+
+    <section id="friends">
+      <div class="col-md-3">
+        <h3>Friends</h3>
+
+        <ul>
+          <% for(let user of users) { %>
+
+          <li>
+            <a href="/users/profile/<%= user._id %>"> <%= user.name %> </a>
+          </li>
+
+          <%} %>
+        </ul>
+      </div>
+    </section>
+
+    <%} %>
+  </div>
+  
+</div>
+
+<script src="/assets/js/home_post.js"></script>
+

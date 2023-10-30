@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" type="text/javascript"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  
+ <%- style %>
+
+</head>
+<body>
+
+    <%- include('header') %>
+
+
+
+  
+    
+      <%- body %>
+
+
+
+
+    <%- include('footer') %>
+    
+
+  
+  <script type="text/javascript">
+
+       <% if(flash.success && flash.success.length > 0){  %>
+          
+        new Noty({
+   
+          text: '<%= flash.success %>',
+          type : 'success',
+          layout : 'topCenter',
+          theme : 'relax',
+          timeout : 1500,
+
+   
+}).show();
+
+      <% } %>
+
+
+      <% if(flash.error && flash.error.length > 0){  %>
+          
+          new Noty({
+     
+            text: '<%= flash.error %>',
+            type : 'error',
+            layout : 'topCenter',
+            theme : 'relax',
+            timeout : 1500,
+            
+     
+  }).show();
+  
+        <% } %>
+
+    
+    const renderPostToPage = (post)=>{
+
+
+    }
+         
+
+     const createPost  = ()=>{
+          
+        const postForm  =  $('#create-post-form')
+       
+         postForm.submit((e)=>{
+          e.preventDefault();
+          
+            $.ajax({
+              type : 'POST',
+              url : '/post/create',
+              data : postForm.serialize(),
+              success : (data=>{
+                renderPostToPage(data.data)
+              }),
+              error : (error)=>{
+               console.log(error)
+              }
+            })
+
+         })
+        
+     }
+
+   
+
+     createPost();
+
+
+
+     
+
+
+  </script>
+
+
+
+</body>
+
+
+
+</html>
+
